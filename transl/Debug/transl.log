@@ -1,14 +1,15 @@
-﻿Сборка начата 21.05.2016 2:52:39.
+﻿Сборка начата 22.05.2016 15:01:25.
      1>Проект "C:\Users\lena\Desktop\transl\transl\transl\transl.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\transl.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt diagram.cpp
          diagram.cpp
      1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(86): warning C4101: uk1: неиспользованная локальная переменная
-     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(619): warning C4101: l1: неиспользованная локальная переменная
-     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(620): warning C4101: uk2: неиспользованная локальная переменная
-     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(620): warning C4101: t1: неиспользованная локальная переменная
-     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(1098): warning C4101: f: неиспользованная локальная переменная
-     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(692): warning C4715: TDiagram::ElemVyrazh: значение возвращается не при всех путях выполнения
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(622): warning C4101: l1: неиспользованная локальная переменная
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(623): warning C4101: uk2: неиспользованная локальная переменная
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(623): warning C4101: t1: неиспользованная локальная переменная
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(1107): warning C4101: f: неиспользованная локальная переменная
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(1305): warning C4800: int: принудительно задано логическое значение "true" или "false" (предупреждение о производительности)
+     1>c:\users\lena\desktop\transl\transl\transl\diagram.cpp(695): warning C4715: TDiagram::ElemVyrazh: значение возвращается не при всех путях выполнения
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\lena\Desktop\transl\transl\Debug\transl.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\lena\Desktop\transl\transl\Debug\transl.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\lena\Desktop\transl\transl\Debug\transl.lib" /MACHINE:X86 Debug\diagram.obj
          Debug\scaner.obj
@@ -20,4 +21,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:01.98
+Затраченное время: 00:00:01.71

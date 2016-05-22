@@ -19,7 +19,7 @@ void TDiagram::Progr(){ // программа
 
 
 	TypeLex l; int t,uk1,simv,str;
-
+	FlInt = true;
 	uk1=sc->GetUK(); t=sc->Scaner(l); //sc->PutUK(uk1);
 
 	str=sc->GetStroka();
@@ -84,6 +84,7 @@ void TDiagram::GlavProgr(){ // главная программа
 	// ---- void --- main --- ( ---- ) --- |блок| -----
 
 	TypeLex l; int t, uk1;
+	FlInt = 1;
 
 	t=sc->Scaner(l);
 	if(t!=Type_Void) sc->PrintError("ожидался тип void",l);
@@ -198,6 +199,8 @@ void TDiagram::Operat(){ //оператор
 		sc->PutUK(uk1); 
 		sc->PutStroka(str);
 							sc->PutSimvol(simv);
+
+							if(FlInt){}
 		Switch_(); 
 		return;
 	}
@@ -401,7 +404,7 @@ void TDiagram::Perem(DataType  type){
 				if (type == type_int)
 				{
 					pt -> n -> dataValue.isInt = exp -> dataValue.isInt;
-					if (FlInt)
+					
 						cout << pt -> n -> id << " = " << pt -> n -> dataValue.isInt << endl;
 				}
 				else 
@@ -1052,26 +1055,32 @@ int TDiagram::SpisokFormPerem(){ //список формальныхх переменных
 
 		if (tree -> n -> type == type_double && assign -> dataType == type_int)
 		{
-			tree -> n -> dataValue.isDouble = assign -> dataValue.isInt;
-			//tree -> n -> type = type_double;
 			if (FlInt)
-			cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isDouble<<endl;
+			{
+				tree -> n -> dataValue.isDouble = assign -> dataValue.isInt;
+				//tree -> n -> type = type_double;
+				cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isDouble<<endl;
+			}
 		}
 		else
 		if (assign -> dataType == type_int)
 		{
-			tree -> n -> dataValue.isInt = assign -> dataValue.isInt;
 			if (FlInt)
-			cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isInt<<endl;
+			{
+				tree -> n -> dataValue.isInt = assign -> dataValue.isInt;
+				cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isInt<<endl;
+			}
 			//tree -> n -> type = type_int;
 		}
 	
 		else if (assign -> dataType == type_double)
 		{
-			tree -> n -> dataValue.isDouble = assign -> dataValue.isDouble;
-			//tree -> n -> type = type_double;
 			if (FlInt)
-			cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isDouble<<endl;
+			{
+				tree -> n -> dataValue.isDouble = assign -> dataValue.isDouble;
+				//tree -> n -> type = type_double;
+				cout<<tree -> n-> id<<" = "<<tree->n->dataValue.isDouble<<endl;
+			}
 		}
 
 	uk1=sc->GetUK();
@@ -1311,15 +1320,17 @@ void TDiagram::Case_(){ //case
 	                                   
 
 	TypeLex l; int t, uk1, str, simv;
+	bool defFlInt = 1;
 
 	t=sc->Scaner(l);
-	FlInt = 0;
+	//FlInt = 0;
 	bool localFlInt = FlInt;
 
 	TData * zn = new TData();
 
 	if(t==Type_Case){
 		do{
+			FlInt = 1;
 			uk1=sc->GetUK();
 				str=sc->GetStroka();
 	simv=sc->GetSimvol();
@@ -1329,20 +1340,33 @@ void TDiagram::Case_(){ //case
 							sc->PutSimvol(simv);
 
 			zn = Vyrazh();
+		//	localFlInt = 0;
+			if(zn->dataValue.isInt == znach->dataValue.isInt
+				|| zn->dataValue.isDouble == znach->dataValue.isDouble
+				|| zn->dataValue.isChar == znach->dataValue.isChar){
+					localFlInt = 1;
+					defFlInt = 0;
+			}
+			else
+				localFlInt = 0;
+
+			if(FlInt && localFlInt)
+				FlInt = 1;
+			else
+				FlInt = 0;
 
 			uk1=sc->GetUK();
 				str=sc->GetStroka();
 	simv=sc->GetSimvol();
 			t=sc->Scaner(l);
-			if( localFlInt && FlInt){
 
-				if(zn == znach)
-					localFlInt = 1;
 
 			if (t!=Type_2_Point) sc->PrintError("ожидался символ :",l);
 			uk1=sc->GetUK();
 				str=sc->GetStroka();
 	simv=sc->GetSimvol();
+
+	//if(FlInt && localFlInt){
 			t=sc->Scaner(l); 
 			sc->PutUK(uk1); 
 			sc->PutStroka(str);
@@ -1354,12 +1378,13 @@ void TDiagram::Case_(){ //case
 	simv=sc->GetSimvol();
 			t=sc->Scaner(l);
 			if (t!=Type_Break) sc->PrintError("ожидался break",l);
+			FlInt=0;
 			t=sc->Scaner(l);
 			if (t!=Type_End_Oper) sc->PrintError("ожидался символ ;",l);
 			uk1=sc->GetUK(); t=sc->Scaner(l);
 				str=sc->GetStroka();
 	simv=sc->GetSimvol();
-			}
+	//}
 		}while(t==Type_Case);
 		sc->PutUK(uk1);
 		sc->PutStroka(str);
@@ -1369,6 +1394,13 @@ void TDiagram::Case_(){ //case
 			str=sc->GetStroka();
 	simv=sc->GetSimvol();
 		if(t==Type_Default){
+		
+			//	if(FlInt && localFlInt){
+			if(defFlInt)
+				FlInt = 1;
+			else
+				FlInt = 0;
+
 			t=sc->Scaner(l);
 			if (t!=Type_2_Point) sc->PrintError("ожидался символ :",l);
 			uk1=sc->GetUK();
@@ -1392,6 +1424,7 @@ void TDiagram::Case_(){ //case
 	simv=sc->GetSimvol();
 	sc->PutStroka(str);
 							sc->PutSimvol(simv);
+	//	}
 		}
 		//uk1=sc->GetUK();
 		t=sc->Scaner(l);sc->PutUK(uk1);

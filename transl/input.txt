@@ -10,9 +10,17 @@ double a;
 void main()
 {
 int r = 5;
-{int b;}
+int v;
+{int b = 7;}
 double c = r+ 1.5e+308;
 c = c + 0.2e+308;
+
+switch(3){
+case 2: r=2; break;
+case 21: r=3; break;
+case 4: r=4; break;
+default: v=7; break;
+}
 
 fun1(r,3);
 }
