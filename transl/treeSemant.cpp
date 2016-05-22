@@ -386,7 +386,12 @@ Tree * Tree::sem_copy_tree_of_func(char *id)
 	Tree * fnUp = this -> find_Up(id);
 	if (fnUp -> n -> is_func)
 	{
-		fnUp = (((((fnUp -> Right) -> Left) -> Left) -> Left) -> Right);
+		fnUp = fnUp -> Right;
+		do{
+			fnUp = fnUp -> Left;
+		}while(!fnUp -> Right);
+		//fnUp = (((((fnUp -> Right) -> Left) -> Left) -> Left) -> Right);
+		fnUp = fnUp -> Right;
 		return fnUp;
 	}
 	else
